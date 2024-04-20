@@ -99,11 +99,7 @@ func adaptHandler(handler func(handler Handler, context echo.Context) error) ech
 
 func (handler Handler) POSTHandler(context echo.Context) error {
 	firstName, lastName := context.QueryParams().Get(queryParamNames.FirstName), context.QueryParams().Get(queryParamNames.LastName)
-	BaseStatusInternalServerErrorString = `If you see this, something is wrong with the server.
-	Please try again.
-	If error proceeds, contact the developer.
-	This info might be useful: error code: `
-)
+}
 
 func makeBaseStatusInternalServerErrorResponse(code int) string {
 	return fmt.Sprintf("%s%d", BaseStatusInternalServerErrorString, code)
@@ -151,7 +147,6 @@ func (handler Handler) GETHandler(context echo.Context) error {
 		return context.JSON(http.StatusOK, row)
 	}
 	db, err := sql.Open("mysql", handler.connectionData.GetConnectionString())
-	db, err := sql.Open("mysql", handler.connectionData.GetConnectionString())
 	if err != nil {
 		fmt.Printf("%v", err)
 		return context.String(http.StatusInternalServerError, "")
@@ -174,16 +169,19 @@ func main() {
 	connectionStringInitializer.SetUsername("username")
 	connectionStringInitializer.SetPassword("pass")
 	connectionStringInitializer.SetHostname("192.168.68.103")
-	connectionStringInitializer.SetPort("8080")
+	connectionStringInitializer.SetPort(8080)
 	connectionStringInitializer.SetUsername("username")
 	connectionStringInitializer.SetEmail("email")
 	connectionStringInitializer.SetFirstName("firstName")
 	connectionStringInitializer.SetLastName("lastName")
 	connectionString := connectionStringInitializer.NewCredentials()
-	// create a new Echo instance
-	e := echo.New()
-	defer e.Close()
-	e.POST("/addressBookWebService", adaptHandler(Handler.POSTHandler))
-	e.GET("/addressBookWebService", adaptHandler(Handler.GETHandler))
-	e.Logger.Fatalf("%v", e.Start(fmt.Sprintf("%s:%s", connectionString.hostname, connectionString.port)))
+	// exit scope of connectionStringInitializer because it is not used
+	{ // create a new Echo instance
+		e := echo.New()
+		defer e.Close()
+		e.POST("/addressBookWebService", adaptHandler(Handler.POSTHandler))
+		e.GET("/addressBookWebService", adaptHandler(Handler.GETHandler))
+		slog.Debug(fmt.Sprintf("%v", connectionString))
+		e.Logger.Fatalf("%v", e.Start(fmt.Sprintf("%s:%s", connectionString.hostname, connectionString.port)))
+	}
 }
