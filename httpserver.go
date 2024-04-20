@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -117,16 +118,19 @@ func main() {
 	connectionStringInitializer.SetUsername("username")
 	connectionStringInitializer.SetPassword("pass")
 	connectionStringInitializer.SetHostname("192.168.68.103")
-	connectionStringInitializer.SetPort("8080")
+	connectionStringInitializer.SetPort(8080)
 	connectionStringInitializer.SetUsername("username")
 	connectionStringInitializer.SetEmail("email")
 	connectionStringInitializer.SetFirstName("firstName")
 	connectionStringInitializer.SetLastName("lastName")
 	connectionString := connectionStringInitializer.NewCredentials()
-	// create a new Echo instance
-	e := echo.New()
-	defer e.Close()
-	e.POST("/addressBookWebService", adaptHandler(Handler.POSTHandler))
-	e.GET("/addressBookWebService", adaptHandler(Handler.GETHandler))
-	e.Logger.Fatalf("%v", e.Start(fmt.Sprintf("%s:%s", connectionString.hostname, connectionString.port)))
+	// exit scope of connectionStringInitializer because it is not used
+	{ // create a new Echo instance
+		e := echo.New()
+		defer e.Close()
+		e.POST("/addressBookWebService", adaptHandler(Handler.POSTHandler))
+		e.GET("/addressBookWebService", adaptHandler(Handler.GETHandler))
+		slog.Debug(fmt.Sprintf("%v", connectionString))
+		e.Logger.Fatalf("%v", e.Start(fmt.Sprintf("%s:%s", connectionString.hostname, connectionString.port)))
+	}
 }
