@@ -3,64 +3,73 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
-	"text/tabwriter"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo/v4"
 )
 
-const (
-	FirstName = "firstName"
-	LastName  = "lastName"
-)
+var jsonObj []any
 
-// print sql table to writer in form of `column: values`
-func printTable(writer io.Writer, table *sql.Rows) error {
-	columns, err := table.Columns()
-	if err != nil {
-		return err
-	}
-	for table.Next() {
-		values := make([]any, len(columns))
-		scanArguments := make([]any, len(values))
-		// copy values from values to scanArgs
-		for i := range values {
-			scanArguments[i] = &values[i]
-		}
-		if err := table.Scan(scanArguments...); err != nil {
-			return err
-		}
-		tabwriter := tabwriter.NewWriter(writer, 0, 4, 2, byte('\t'), 0)
-		for _, column := range columns {
-			fmt.Fprintf(tabwriter, "\t"+column)
-		}
-		for row := range columns {
-			fmt.Fprintf(tabwriter, "\t%v", values[row])
-		}
-	}
-	return nil
+var queryParamNames QueryParamNames
+
+type Handler struct {
+	db             *sql.DB
+	connectionData Credentials
 }
 
-func POSTHandler(context echo.Context) error {
-	firstName, lastName := context.QueryParams().Get(FirstName), context.QueryParams().Get(LastName)
-	//check first name and last name are inputted
+type QueryParamNames struct {
+	FirstName string
+	LastName  string
+	Email     string
+	PhoneNo   string
+}
+
+type PrintingStruct struct {
+	MinWidth int
+	TabWidth int
+	Padding  int
+	PadChar  byte
+	Flags    uint
+}
+
+func newPrinting() PrintingStruct {
+	return PrintingStruct{
+		MinWidth: 0,
+		TabWidth: 4,
+		Padding:  2,
+		PadChar:  byte('\t'),
+		Flags:    0,
+	}
+}
+
+const (
+	BaseStatusInternalServerErrorString = `If you see this, something is wrong with the server.
+	Please try again.
+	If error proceeds, contact the developer.
+	This info might be useful: error code: `
+)
+
+func makeBaseStatusInternalServerErrorResponse(code int) string {
+	return fmt.Sprintf("%s%d", BaseStatusInternalServerErrorString, code)
+}
+
+func adaptHandler(handler func(handler Handler, context echo.Context) error) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return handler(Handler{}, c)
+	}
+}
+
+func (handler Handler) POSTHandler(context echo.Context) error {
+	firstName, lastName := context.QueryParams().Get(queryParamNames.FirstName), context.QueryParams().Get(queryParamNames.LastName)
 	if firstName == "" {
 		return context.String(http.StatusBadRequest, "first name required")
 	}
 	if lastName == "" {
 		return context.String(http.StatusBadRequest, "last name required")
 	}
-	// Open a connection to the database
-	db, err := sql.Open("mysql", "root:password@tcp(localhost:3306)/addressBookWebService")
-	if err != nil {
-		log.Printf("%v", err)
-		return context.String(http.StatusInternalServerError, "")
-	}
-	defer db.Close()
-	// If the first name and last name already exist in the database, delete them
-	_, err = db.Exec("DELETE FROM addressBook WHERE firstName =? AND lastName =?", firstName, lastName)
+	_, err := handler.db.Exec("DELETE FROM addressBook WHERE firstName =? AND lastName =?", firstName, lastName)
 	if err != nil {
 		log.Printf("%v", err)
 		return context.String(http.StatusInternalServerError, "")
@@ -68,13 +77,10 @@ func POSTHandler(context echo.Context) error {
 	return context.String(http.StatusOK, "")
 }
 
-func GETHandler(context echo.Context) error {
+func (handler Handler) GETHandler(context echo.Context) error {
 	var firstName, lastName string = context.QueryParams().Get("firstName"), context.QueryParams().Get("lastName")
-	//check first name and last name are inputted, if inputted, return table where first name and last name match
-	// if none match, return empty table
 	if firstName != "" && lastName != "" {
-		// Open a connection to the database
-		db, err := sql.Open("mysql", "root:password@tcp(localhost:3306)/addressBookWebService")
+		db, err := sql.Open("mysql", handler.connectionData.GetConnectionString())
 		if err != nil {
 			log.Printf("%v", err)
 			return context.String(http.StatusInternalServerError, "")
@@ -85,17 +91,10 @@ func GETHandler(context echo.Context) error {
 			log.Printf("%v", err)
 			return context.String(http.StatusInternalServerError, "")
 		}
-		var writer io.Writer
-		err = printTable(writer, row)
-		if err != nil {
-			fmt.Printf("%v", err)
-			return context.String(http.StatusInternalServerError, "")
-		}
-		output := fmt.Sprintf("%#v", writer)
-		return context.String(http.StatusOK, output)
+		defer row.Close()
+		return context.JSON(http.StatusOK, row)
 	}
-	// Open a connection to the database
-	db, err := sql.Open("mysql", "root:password@tcp(localhost:3306)/addressBookWebService")
+	db, err := sql.Open("mysql", handler.connectionData.GetConnectionString())
 	if err != nil {
 		fmt.Printf("%v", err)
 		return context.String(http.StatusInternalServerError, "")
@@ -107,12 +106,27 @@ func GETHandler(context echo.Context) error {
 		log.Printf("%v", err)
 		return context.String(http.StatusInternalServerError, "")
 	}
-	var writer io.Writer
-	err = printTable(writer, rows)
-	if err != nil {
-		fmt.Printf("%v", err)
-		return context.String(http.StatusInternalServerError, "")
-	}
-	output := fmt.Sprintf("%#v", writer)
-	return context.String(http.StatusOK, output)
+	return context.JSON(http.StatusOK, rows)
+}
+
+type exitCodes map[string]int
+
+func main() {
+	connectionStringInitializer := NewCredentialsInitializer()
+	connectionStringInitializer.SetDatabase("mysql")
+	connectionStringInitializer.SetUsername("username")
+	connectionStringInitializer.SetPassword("pass")
+	connectionStringInitializer.SetHostname("192.168.68.103")
+	connectionStringInitializer.SetPort("8080")
+	connectionStringInitializer.SetUsername("username")
+	connectionStringInitializer.SetEmail("email")
+	connectionStringInitializer.SetFirstName("firstName")
+	connectionStringInitializer.SetLastName("lastName")
+	connectionString := connectionStringInitializer.NewCredentials()
+	// create a new Echo instance
+	e := echo.New()
+	defer e.Close()
+	e.POST("/addressBookWebService", adaptHandler(Handler.POSTHandler))
+	e.GET("/addressBookWebService", adaptHandler(Handler.GETHandler))
+	e.Logger.Fatalf("%v", e.Start(fmt.Sprintf("%s:%s", connectionString.hostname, connectionString.port)))
 }
