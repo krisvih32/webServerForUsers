@@ -1,0 +1,9 @@
+scons
+if [ $?==0 ]; then
+	git add VERSION.txt go.mod go.sum
+	if [ $1==nobuild ]; then
+		git commit
+		exit
+	fi
+fi
+go build && git commit 

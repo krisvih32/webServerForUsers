@@ -1,0 +1,1 @@
+PAGER=cat git log > NEWS && autoreconf -i

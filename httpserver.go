@@ -117,7 +117,7 @@ func main() {
 	connectionStringInitializer.SetDatabase("mysql")
 	connectionStringInitializer.SetUsername("username")
 	connectionStringInitializer.SetPassword("pass")
-	connectionStringInitializer.SetHostname("192.168.68.103")
+	connectionStringInitializer.SetServerHostname("192.168.68.103")
 	connectionStringInitializer.SetPort(8080)
 	connectionStringInitializer.SetUsername("username")
 	connectionStringInitializer.SetEmail("email")
@@ -131,6 +131,7 @@ func main() {
 		e.POST("/addressBookWebService", adaptHandler(Handler.POSTHandler))
 		e.GET("/addressBookWebService", adaptHandler(Handler.GETHandler))
 		slog.Debug(fmt.Sprintf("%v", connectionString))
-		e.Logger.Fatalf("%v", e.Start(fmt.Sprintf("%s:%s", connectionString.hostname, connectionString.port)))
+		address := fmt.Sprintf("%s:%s", connectionString.GetServerHostname(), connectionString.GetPort())
+		e.Logger.Fatalf("%v", e.Start(address))
 	}
 }

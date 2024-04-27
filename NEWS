@@ -1,0 +1,265 @@
+commit f46ba88417e163b6fbaa7a9e197ad7d3fd6c5e95
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Sun Apr 21 18:18:32 2024 -0700
+
+    edited README install script to be shorter also not working since need
+    to push for test
+            new file:   .install.sh
+            modified:   README.md
+
+commit 5c29868b3c6be56f64f519babfb0f72e00635fb7
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Apr 19 20:30:17 2024 -0700
+
+    move httpserver.psu to docs
+    
+            renamed:    httpserver.psu -> docs/httpserver.psu
+
+commit 4bd28c9597d4324281e0327442f3a62f3468425a
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Apr 19 20:29:35 2024 -0700
+
+    edited readme for installation instructions
+
+commit 37408fb12f7347b7e14ab8f9a69cdc574de37928
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Apr 19 20:24:36 2024 -0700
+
+    changed httpserver.go
+            modified:   VERSION.txt
+            modified:   go.mod
+            modified:   go.sum
+            modified:   httpserver.go
+
+commit b6a5a1ecd332768da33d666a774c0eb12f28800c
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Apr 19 20:22:52 2024 -0700
+
+    changed SConstruct
+
+commit 615ebb8808e61de800cce43ccc5fea513b7a7999
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Apr 19 20:18:47 2024 -0700
+
+    fixing gitignore
+            modified:   .gitgnore
+
+commit 93f7c7902eb28216bad3aee96429d8f6b6e04e82
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Apr 19 20:13:01 2024 -0700
+
+    unstable not working in progress refactoring
+    
+            modified:   VERSION.txt
+            modified:   httpserver.go
+            modified:   vendor/github.com/go-sql-driver/mysql/CHANGELOG.md
+            modified:   vendor/github.com/go-sql-driver/mysql/README.md
+            modified:   vendor/github.com/go-sql-driver/mysql/auth.go
+            modified:   vendor/github.com/go-sql-driver/mysql/connection.go
+            modified:   vendor/github.com/go-sql-driver/mysql/connector.go
+            modified:   vendor/github.com/go-sql-driver/mysql/errors.go
+            modified:   vendor/github.com/go-sql-driver/mysql/fields.go
+            modified:   vendor/github.com/go-sql-driver/mysql/nulltime.go
+            modified:   vendor/github.com/go-sql-driver/mysql/packets.go
+            modified:   vendor/github.com/go-sql-driver/mysql/statement.go
+            modified:   vendor/github.com/labstack/echo/v4/CHANGELOG.md
+            modified:   vendor/github.com/labstack/echo/v4/Makefile
+            modified:   vendor/github.com/labstack/echo/v4/README.md
+            modified:   vendor/github.com/labstack/echo/v4/bind.go
+            modified:   vendor/github.com/labstack/echo/v4/binder.go
+            modified:   vendor/github.com/labstack/echo/v4/context.go
+            modified:   vendor/github.com/labstack/echo/v4/context_fs.go
+            modified:   vendor/github.com/labstack/echo/v4/echo.go
+            modified:   vendor/github.com/labstack/echo/v4/echo_fs.go
+            modified:   vendor/github.com/labstack/echo/v4/group.go
+            modified:   vendor/github.com/labstack/echo/v4/group_fs.go
+            modified:   vendor/github.com/labstack/echo/v4/ip.go
+            modified:   vendor/github.com/labstack/echo/v4/json.go
+            modified:   vendor/github.com/labstack/echo/v4/log.go
+            modified:   vendor/github.com/labstack/echo/v4/response.go
+            modified:   vendor/github.com/labstack/echo/v4/router.go
+            modified:   vendor/golang.org/x/net/http2/frame.go
+            modified:   vendor/golang.org/x/net/http2/pipe.go
+            modified:   vendor/golang.org/x/net/http2/server.go
+            modified:   vendor/golang.org/x/net/http2/transport.go
+            modified:   vendor/golang.org/x/sys/unix/aliases.go
+            modified:   vendor/golang.org/x/sys/unix/mkerrors.sh
+            modified:   vendor/golang.org/x/sys/unix/mmap_nomremap.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_darwin_libSystem.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_freebsd.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_linux.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_zos_s390x.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_386.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_amd64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_arm.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_arm64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_loong64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mips.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mips64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mips64le.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mipsle.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_ppc.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_ppc64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_ppc64le.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_riscv64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_s390x.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_sparc64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_linux.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_386.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_amd64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_mips64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_ppc64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_riscv64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_386.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_amd64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_arm.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_arm64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_loong64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mips.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mips64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mips64le.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mipsle.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_ppc.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_ppc64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_ppc64le.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_riscv64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_s390x.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_sparc64.go
+            modified:   vendor/golang.org/x/sys/unix/ztypes_linux.go
+            modified:   vendor/modules.txt
+    
+            modified:   vendor/github.com/go-sql-driver/mysql/CHANGELOG.md
+            modified:   vendor/github.com/go-sql-driver/mysql/README.md
+            modified:   vendor/github.com/go-sql-driver/mysql/auth.go
+            modified:   vendor/github.com/go-sql-driver/mysql/connection.go
+            modified:   vendor/github.com/go-sql-driver/mysql/connector.go
+            modified:   vendor/github.com/go-sql-driver/mysql/errors.go
+            modified:   vendor/github.com/go-sql-driver/mysql/fields.go
+            modified:   vendor/github.com/go-sql-driver/mysql/nulltime.go
+            modified:   vendor/github.com/go-sql-driver/mysql/packets.go
+            modified:   vendor/github.com/go-sql-driver/mysql/statement.go
+            modified:   vendor/github.com/labstack/echo/v4/CHANGELOG.md
+            modified:   vendor/github.com/labstack/echo/v4/Makefile
+            modified:   vendor/github.com/labstack/echo/v4/README.md
+            modified:   vendor/github.com/labstack/echo/v4/bind.go
+            modified:   vendor/github.com/labstack/echo/v4/binder.go
+            modified:   vendor/github.com/labstack/echo/v4/context.go
+            modified:   vendor/github.com/labstack/echo/v4/context_fs.go
+            modified:   vendor/github.com/labstack/echo/v4/echo.go
+            modified:   vendor/github.com/labstack/echo/v4/echo_fs.go
+            modified:   vendor/github.com/labstack/echo/v4/group.go
+            modified:   vendor/github.com/labstack/echo/v4/group_fs.go
+            modified:   vendor/github.com/labstack/echo/v4/ip.go
+            modified:   vendor/github.com/labstack/echo/v4/json.go
+            modified:   vendor/github.com/labstack/echo/v4/log.go
+            modified:   vendor/github.com/labstack/echo/v4/response.go
+            new file:   vendor/github.com/labstack/echo/v4/responsecontroller_1.19.go
+            new file:   vendor/github.com/labstack/echo/v4/responsecontroller_1.20.go
+            modified:   vendor/github.com/labstack/echo/v4/router.go
+            modified:   vendor/golang.org/x/net/http2/frame.go
+            modified:   vendor/golang.org/x/net/http2/pipe.go
+            modified:   vendor/golang.org/x/net/http2/server.go
+            new file:   vendor/golang.org/x/net/http2/testsync.go
+            modified:   vendor/golang.org/x/net/http2/transport.go
+            modified:   vendor/golang.org/x/sys/unix/aliases.go
+            modified:   vendor/golang.org/x/sys/unix/mkerrors.sh
+            modified:   vendor/golang.org/x/sys/unix/mmap_nomremap.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_darwin_libSystem.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_freebsd.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_linux.go
+            modified:   vendor/golang.org/x/sys/unix/syscall_zos_s390x.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_386.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_amd64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_arm.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_arm64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_loong64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mips.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mips64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mips64le.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_mipsle.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_ppc.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_ppc64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_ppc64le.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_riscv64.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_s390x.go
+            modified:   vendor/golang.org/x/sys/unix/zerrors_linux_sparc64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_linux.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_386.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_amd64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_arm64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_mips64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_ppc64.go
+            modified:   vendor/golang.org/x/sys/unix/zsyscall_openbsd_riscv64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_386.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_amd64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_arm.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_arm64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_loong64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mips.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mips64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mips64le.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_mipsle.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_ppc.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_ppc64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_ppc64le.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_riscv64.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_s390x.go
+            modified:   vendor/golang.org/x/sys/unix/zsysnum_linux_sparc64.go
+            modified:   vendor/golang.org/x/sys/unix/ztypes_linux.go
+            modified:   vendor/modules.txt
+
+commit b6e78ed9e7da15368f961659b8e61ec911c69a01
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Sun Mar 24 16:50:46 2024 -0700
+
+    fixed VERSION.txt not updating. also added commit shell script
+            commit
+
+commit 798bcb4eea88f0e5ee313231da037a3df7fa0ba1
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Sun Mar 24 16:45:46 2024 -0700
+
+    added webServerForUsers executable to .gitignore
+            modified:   .gitignore
+
+commit 6600ef079fa23ef28d8d730f8a83458e6849d3e5
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Mar 22 17:41:38 2024 -0700
+
+    add post request also make main
+
+commit 2f38c4db56ff28079eb68e960d10b1668179ed32
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Mar 22 16:07:50 2024 -0700
+
+    added VERSION.txt counter
+
+commit 1aab8abc8dde81805b0d4ad1f873ea9806463d11
+Author: krisvih32 <krisvih32@yahoo.com>
+Date:   Fri Mar 22 08:44:20 2024 -0700
+
+    Updated .gitignore
+
+commit 7f0f7300abefce9cd78e1fa78e274aded62ab96d
+Author: root <root@Vihaan-PC.>
+Date:   Fri Mar 22 08:42:39 2024 -0700
+
+    removed unused make file
+            deleted:    Makefile
+
+commit e68688190c1d4a52e3edfba82b5a02786a563a4f
+Author: root <root@Vihaan-PC.>
+Date:   Wed Mar 20 17:56:35 2024 -0700
+
+    added sconstruct
+
+commit 36b63c9dfcbd2d94c7888fb7f00a1530c0bd7919
+Author: krisvih32 <132164432+krisvih32@users.noreply.github.com>
+Date:   Wed Mar 20 13:57:53 2024 -0700
+
+    Initial commit
