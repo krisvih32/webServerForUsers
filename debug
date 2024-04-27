@@ -1,1 +1,3 @@
 SCONS_WRITE=0 scons && dlv test --build-flags="-gcflags 'all=-N -l'"
+
+SCONS_WRITE=0 scons && dlv test --build-flags="-gcflags 'all=-N -l'"

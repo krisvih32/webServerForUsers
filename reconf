@@ -1,1 +1,3 @@
 PAGER=cat git log > NEWS && autoreconf -i
+
+PAGER=cat git log > NEWS && autoreconf -i
