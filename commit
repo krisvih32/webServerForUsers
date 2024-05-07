@@ -1,3 +1,4 @@
+#!/bin/bash
 scons
 if [ $?==0 ]; then
 	git add VERSION.txt go.mod go.sum
