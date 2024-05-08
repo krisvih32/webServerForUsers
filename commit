@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ $?==0 ]; then
-	git add VERSION.txt go.mod go.sum
+	git add go.mod go.sum
 	if [ $1==nobuild ]; then
 		git commit
 		exit
