@@ -1,7 +1,2 @@
-main: python go
-	echo %%UNIX_TRUE%%
-python: 
-	true
-go:
-	true
-	
+bin_PROGRAMS = webServerForUsers
+webServerForUsers_SOURCES = webServerForUsers
