@@ -5,3 +5,9 @@ AC_LANG(Go)
 AC_MSG_NOTICE([Configuring])
 AC_OUTPUT()
 AC_CONFIG_FILES([Makefile])
+if WINDOWS
+WINDOWS_TRUE=1
+endif
+if UNIX
+UNIX_TRUE=1
+endif
