@@ -8,8 +8,43 @@ import (
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/labstack/echo/v4"
 )
+
+var jsonObj []any
+
+var queryParamNames QueryParamNames
+
+type Handler struct {
+	db             *sql.DB
+	connectionData Credentials
+}
+
+type QueryParamNames struct {
+	FirstName string
+	LastName  string
+	Email     string
+	PhoneNo   string
+}
+
+type PrintingStruct struct {
+	MinWidth int
+	TabWidth int
+	Padding  int
+	PadChar  byte
+	Flags    uint
+}
+
+func newPrinting() PrintingStruct {
+	return PrintingStruct{
+		MinWidth: 0,
+		TabWidth: 4,
+		Padding:  2,
+		PadChar:  byte('\t'),
+		Flags:    0,
+	}
+}
 
 var jsonObj []any
 
@@ -64,6 +99,20 @@ func adaptHandler(handler func(handler Handler, context echo.Context) error) ech
 
 func (handler Handler) POSTHandler(context echo.Context) error {
 	firstName, lastName := context.QueryParams().Get(queryParamNames.FirstName), context.QueryParams().Get(queryParamNames.LastName)
+}
+
+func makeBaseStatusInternalServerErrorResponse(code int) string {
+	return fmt.Sprintf("%s%d", BaseStatusInternalServerErrorString, code)
+}
+
+func adaptHandler(handler func(handler Handler, context echo.Context) error) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		return handler(Handler{}, c)
+	}
+}
+
+func (handler Handler) POSTHandler(context echo.Context) error {
+	firstName, lastName := context.QueryParams().Get(queryParamNames.FirstName), context.QueryParams().Get(queryParamNames.LastName)
 	if firstName == "" {
 		return context.String(http.StatusBadRequest, "first name required")
 	}
@@ -92,6 +141,8 @@ func (handler Handler) GETHandler(context echo.Context) error {
 			log.Printf("%v", err)
 			return context.String(http.StatusInternalServerError, "")
 		}
+		defer row.Close()
+		return context.JSON(http.StatusOK, row)
 		defer row.Close()
 		return context.JSON(http.StatusOK, row)
 	}
