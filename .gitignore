@@ -10,10 +10,6 @@
 *.trace
 go.work
 
-# Dependency directories
-vendor/
-Godeps/
-
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
 *.a
@@ -100,3 +96,6 @@ config.yml
 !/CONTRIBUTING.md
 !/logs/
 !/docs/
+!vendor/
+!Godeps/
+!_*
