@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/krisvih32/webServerForUsers"
 	"net/http"
 	"net/http/httptest"
 	"sqlmock"
 	"testing"
-	"github.com/krisvih32/webServerForUsers"
 )
 
 // POSTHandler should return 200 OK when all required query parameters are provided and database operations succeed
@@ -36,7 +36,7 @@ func TestPOSTHandlerSuccessCorrectUsage(t *testing.T) {
 	connectionStringInitializer.SetQueryParamNames(*queryParamNames)
 	connectionString := connectionStringInitializer.NewCredentials()
 	db, err := sql.Open("mysql", connectionString.GetConnectionString())
-	if (err != nil){
+	if err != nil {
 		os.Exit(1)
 	}
 	connectionData := Credentials{connectionString: "test_connection_string"}
