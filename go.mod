@@ -1,4 +1,4 @@
-module krisvih32/webServerForUsers
+module github.com/krisvih32/webServerForUsers
 
 go 1.18
 

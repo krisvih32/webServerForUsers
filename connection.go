@@ -37,8 +37,7 @@ func (credInit CredentialsInitializer) NewCredentials() *Credentials {
 	return credentials
 }
 
-
-func (main CredentialsInitializer) SetQueryParamNames(queryParamNames QueryParamNames){
+func (main CredentialsInitializer) SetQueryParamNames(queryParamNames QueryParamNames) {
 	main["queryParamNames"] = queryParamNames
 }
 

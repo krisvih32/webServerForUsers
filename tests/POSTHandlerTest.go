@@ -3,8 +3,9 @@ package main
 import (
 	"net/http"
 	"net/http/httptest"
-	"testing"
 	"sqlmock"
+	"testing"
+	"github.com/krisvih32/webServerForUsers"
 )
 
 // POSTHandler should return 200 OK when all required query parameters are provided and database operations succeed
@@ -14,7 +15,30 @@ func TestPOSTHandlerSuccessCorrectUsage(t *testing.T) {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
 	}
 	defer db.Close()
-
+	queryParamNamesInitializer := NewQueryParamNamesInitializer()
+	queryParamNamesInitializer.SetFirstName("firstName")
+	queryParamNamesInitializer.SetLastName("lastName")
+	queryParamNamesInitializer.SetEmail("email")
+	queryParamNamesInitializer.SetPhoneNo("phoneNo")
+	queryParamNames := queryParamNamesInitializer.NewQueryParamNames()
+	connectionStringInitializer := NewCredentialsInitializer()
+	connectionStringInitializer.SetDatabase("mysql")
+	connectionStringInitializer.SetUsername("username")
+	connectionStringInitializer.SetPassword("pass")
+	connectionStringInitializer.SetServerHostname("localhost")
+	connectionStringInitializer.SetPort(8080)
+	connectionStringInitializer.SetUsername("username")
+	connectionStringInitializer.SetEmail("email")
+	connectionStringInitializer.SetFirstName("firstName")
+	connectionStringInitializer.SetLastName("lastName")
+	connectionStringInitializer.SetPhoneNo("phoneNo")
+	connectionStringInitializer.SetSQLHostname("DESKTOP-D4U24AV")
+	connectionStringInitializer.SetQueryParamNames(*queryParamNames)
+	connectionString := connectionStringInitializer.NewCredentials()
+	db, err := sql.Open("mysql", connectionString.GetConnectionString())
+	if (err != nil){
+		os.Exit(1)
+	}
 	connectionData := Credentials{connectionString: "test_connection_string"}
 	queryParamNames := QueryParamNames{
 		FirstName: "firstName",
