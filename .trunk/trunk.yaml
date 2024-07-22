@@ -17,11 +17,19 @@ runtimes:
     - python@3.10.8
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
+  ignore:
+    - linters: [ALL]
+      paths:
+        - vendor
+        - install*
+        - .*
+        - missing*
+
   disabled:
     - "*.sh"
   enabled:
     - actionlint@1.7.1
-    - checkov@3.2.194
+    - checkov@3.2.198
     - git-diff-check
     - gofmt@1.20.4
     - golangci-lint@1.59.1
