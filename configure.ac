@@ -1,7 +1,0 @@
-AC_INIT([webServerForUsers], [0.0.5A])
-AC_CONFIG_SRCDIR([.])
-AM_INIT_AUTOMAKE()
-AC_LANG(Go)
-AC_MSG_NOTICE([Configuring])
-AC_OUTPUT()
-AC_CONFIG_FILES([Makefile])
