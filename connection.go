@@ -20,6 +20,7 @@ type CredentialsInitializer map[string]any
 func NewCredentialsInitializer() *CredentialsInitializer {
 	return &CredentialsInitializer{}
 }
+
 func (credInit CredentialsInitializer) NewCredentials() *Credentials {
 	credInit["connectionString"] = credInit.GetConnectionString()
 	credentials := &Credentials{
