@@ -1,33 +1,33 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/go
 {
-	"name": "Go",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
-	"features": {
-		"ghcr.io/devcontainers/features/go:1": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers/features/python:1": {
-			"installTools": true,
-			"optimize": true,
-			"version": "os-provided"
-		},
-		"ghcr.io/jungaretti/features/make:1": {}
-	},
+  "name": "Go",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "installTools": true,
+      "optimize": true,
+      "version": "os-provided"
+    },
+    "ghcr.io/jungaretti/features/make:1": {}
+  },
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "(type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) && sudo mkdir -p -m 755 /etc/apt/keyrings  && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg  && echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main\" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null && sudo apt update  && sudo apt install gh -y && sudo mv updateGitLogToChangelog /etc/init.d && ./updateGitLogToChangelog && git fetch --all && git branch -r | grep -v '\\->' | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done && sudo apt install python-scons "
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "(type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) && sudo mkdir -p -m 755 /etc/apt/keyrings  && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg  && echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main\" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null && sudo apt update  && sudo apt install gh -y && sudo mv updateGitLogToChangelog /etc/init.d && ./updateGitLogToChangelog && git fetch --all && git branch -r | grep -v '\\->' | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done && sudo apt install python-scons "
 
-	// Configure tool-specific properties.
-	// "customizations": {},
+  // Configure tool-specific properties.
+  // "customizations": {},
 
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  // "remoteUser": "root"
 }
