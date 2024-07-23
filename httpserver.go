@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"github.com/labstack/echo/v4"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type PrintingStruct struct {
@@ -56,10 +57,12 @@ func main() {
 	connectionStringInitializer.SetQueryParamNames(*queryParamNames)
 	connectionString := connectionStringInitializer.NewCredentials()
 	db, err := sql.Open("mysql", connectionString.GetConnectionString())
-	if (err != nil){
+	_ = err
+	if err != nil {
+		fmt.Printf("err: %v", err)
 		os.Exit(1)
 	}
-	handler:=NewHandler(db, *connectionString, *queryParamNames)
+	handler := NewHandler(db, *connectionString, *queryParamNames)
 	e := echo.New()
 	defer e.Close()
 	e.POST("/addressBookWebService", adaptHandler(db, handler.connectionData, *queryParamNames))
@@ -67,4 +70,3 @@ func main() {
 	address := fmt.Sprintf("%s:%s", connectionString.GetServerHostname(), connectionString.GetPort())
 	e.Logger.Fatalf("%v", e.Start(address))
 }
-
