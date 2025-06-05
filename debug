@@ -1,1 +1,1 @@
-SCONS_WRITE=0 scons && dlv test --build-flags="-gcflags 'all=-N -l'"
+GOPATH=~/go PATH=$PATH:$GOPATH/bin dlv debug . --build-flags="-gcflags 'all=-N -l'"

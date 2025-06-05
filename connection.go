@@ -20,103 +20,108 @@ type CredentialsInitializer map[string]any
 func NewCredentialsInitializer() *CredentialsInitializer {
 	return &CredentialsInitializer{}
 }
-func (self CredentialsInitializer) NewCredentials() *Credentials {
-	self["connectionString"] = self.GetConnectionString()
+
+func (credInit CredentialsInitializer) NewCredentials() *Credentials {
+	credInit["connectionString"] = credInit.GetConnectionString()
 	credentials := &Credentials{
-		fmt.Sprintf("%v", self["database"]),
-		fmt.Sprintf("%v", self["username"]),
-		fmt.Sprintf("%v", self["email"]),
-		fmt.Sprintf("%v", self["phoneNo"]),
-		fmt.Sprintf("%v", self["firstName"]),
-		fmt.Sprintf("%v", self["lastName"]),
-		fmt.Sprintf("%v", self["password"]),
-		fmt.Sprintf("%v", self["SQLhostname"]),
-		fmt.Sprintf("%v", self["serverHostname"]),
-		fmt.Sprintf("%v", self["port"]),
-		""}
+		fmt.Sprintf("%v", credInit["firstName"]),
+		fmt.Sprintf("%v", credInit["lastName"]),
+		fmt.Sprintf("%v", credInit["email"]),
+		fmt.Sprintf("%v", credInit["phoneNo"]),
+		fmt.Sprintf("%v", credInit["username"]),
+		fmt.Sprintf("%v", credInit["password"]),
+		fmt.Sprintf("%v", credInit["SQLhostname"]),
+		fmt.Sprintf("%v", credInit["serverHostname"]),
+		fmt.Sprintf("%v", credInit["port"]),
+		fmt.Sprintf("%v", credInit["database"]),
+		fmt.Sprintf("%v", credInit["connectionString"])}
 	return credentials
 }
 
-func (self CredentialsInitializer) SetFirstName(firstName string) {
-	self["firstName"] = firstName
+func (main CredentialsInitializer) SetQueryParamNames(queryParamNames QueryParamNames) {
+	main["queryParamNames"] = queryParamNames
 }
 
-func (self CredentialsInitializer) SetLastName(lastName string) {
-	self["lastName"] = lastName
+func (main CredentialsInitializer) SetFirstName(firstName string) {
+	main["firstName"] = firstName
 }
 
-func (self CredentialsInitializer) SetEmail(email string) {
-	self["email"] = email
+func (credInit CredentialsInitializer) SetLastName(lastName string) {
+	credInit["lastName"] = lastName
 }
 
-func (self CredentialsInitializer) SetPhoneNo(phoneNo string) {
-	self["phoneNo"] = phoneNo
+func (credInit CredentialsInitializer) SetEmail(email string) {
+	credInit["email"] = email
 }
 
-func (self CredentialsInitializer) SetUsername(username string) {
-	self["username"] = username
-}
-func (self CredentialsInitializer) SetPassword(password string) {
-	self["password"] = password
+func (credInit CredentialsInitializer) SetPhoneNo(phoneNo string) {
+	credInit["phoneNo"] = phoneNo
 }
 
-func (self CredentialsInitializer) SetSQLHostname(hostname string) {
-	self["SQLhostname"] = hostname
+func (credInit CredentialsInitializer) SetUsername(username string) {
+	credInit["username"] = username
 }
-func (self CredentialsInitializer) SetServerHostname(hostname string) {
-	self["serverHostname"] = hostname
-}
-func (self CredentialsInitializer) SetPort(port int) {
-	self["port"] = fmt.Sprintf("%d", port)
+func (credInit CredentialsInitializer) SetPassword(password string) {
+	credInit["password"] = password
 }
 
-func (self CredentialsInitializer) SetDatabase(database string) {
-	self["database"] = database
+func (credInit CredentialsInitializer) SetSQLHostname(hostname string) {
+	credInit["SQLhostname"] = hostname
+}
+func (credInit CredentialsInitializer) SetServerHostname(hostname string) {
+	credInit["serverHostname"] = hostname
+}
+func (credInit CredentialsInitializer) SetPort(port int) {
+	credInit["port"] = port
 }
 
-func (self Credentials) GetFirstName() string {
-	return self.firstName
+func (credInit CredentialsInitializer) SetDatabase(database string) {
+	credInit["database"] = database
 }
 
-func (self Credentials) GetLastName() string {
-	return self.lastName
+func (cred Credentials) GetFirstName() string {
+	return cred.firstName
 }
 
-func (self Credentials) GetEmail() string {
-	return self.email
+func (cred Credentials) GetLastName() string {
+	return cred.lastName
 }
 
-func (self Credentials) GetPhoneNo() string {
-	return self.phoneNo
+func (cred Credentials) GetEmail() string {
+	return cred.email
 }
 
-func (self Credentials) GetUsername() string {
-	return self.username
+func (cred Credentials) GetPhoneNo() string {
+	return cred.phoneNo
 }
 
-func (self Credentials) GetPassword() string {
-	return self.password
+func (cred Credentials) GetUsername() string {
+	return cred.username
 }
 
-func (self Credentials) GetSQLHostname() string {
-	return self.SQLhostname
+func (cred Credentials) GetPassword() string {
+	return cred.password
 }
 
-func (self Credentials) GetServerHostname() string {
-	return self.serverHostname
+func (cred Credentials) GetSQLHostname() string {
+	return cred.SQLhostname
 }
 
-func (self Credentials) GetPort() string {
-	return self.port
+func (cred Credentials) GetServerHostname() string {
+	return cred.serverHostname
 }
 
-func (self Credentials) GetDatabase() string {
-	return self.database
+func (cred Credentials) GetPort() string {
+	return cred.port
 }
 
-func (self CredentialsInitializer) GetConnectionString() string {
-	return fmt.Sprintf("%s:%s@tcp(%s:%d)/addressBookWebService", self["username"], self["password"], self["hostname"], self["port"])
+func (cred Credentials) GetDatabase() string {
+	return cred.database
 }
-func (self Credentials) GetConnectionString() string {
-	return fmt.Sprintf("%s:%s@tcp(%s:%s)/addressBookWebService", self.username, self.password, self.serverHostname, self.port)
+
+func (cred CredentialsInitializer) GetConnectionString() string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%d)/addressBookWebService", cred["username"], cred["password"], cred["hostname"], cred["port"])
+}
+func (cred Credentials) GetConnectionString() string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/addressBookWebService", cred.username, cred.password, cred.serverHostname, cred.port)
 }
